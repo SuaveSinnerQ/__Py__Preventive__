@@ -74,3 +74,6 @@ def sql_injection_scan(url):
 if __name__ == "__main__":
     urlToBeChecked = "https://cnn.com"         ## specify url to check (put inside a dict) 
     sql_injection_scan(urlToBeChecked)
+
+
+
