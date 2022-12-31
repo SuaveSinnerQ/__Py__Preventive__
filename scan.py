@@ -5,7 +5,8 @@ from urllib.parse import urljoin
 
 s = requests.Session()
 s.headers["User-Agent"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36"
-
+            ##user-Agent obtain from dev tools
+    
 #  Function to get all forms 
 def get_forms(url):
     soup = BeautifulSoup(s.get(url).content, "html.parser")
@@ -49,11 +50,11 @@ def sql_injection_scan(url):
     for form in forms:
         details = form_details(form)
         
-        for i in "\"'":
+        for i in "\"'":             ## to loop for all contents inside of quotes \"'
             data = {}
             for input_tag in details["inputs"]:
                 if input_tag["type"] == "hidden" or input_tag["value"]:
-                    data[input_tag['name']] = input_tag["value"] + i
+                    data[input_tag['name']] = input_tag["value"] + i  ## set name == value iterator + symbol 
                 elif input_tag["type"] != "submit":
                     data[input_tag['name']] = f"test{i}"
     
@@ -71,5 +72,5 @@ def sql_injection_scan(url):
                 break
 
 if __name__ == "__main__":
-    urlToBeChecked = "https://cnn.com"
+    urlToBeChecked = "https://cnn.com"         ## specify url to check (put inside a dict) 
     sql_injection_scan(urlToBeChecked)
